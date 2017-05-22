@@ -1,2 +1,2 @@
 # go-loopia
-loopia api library for go
+loopia api library
