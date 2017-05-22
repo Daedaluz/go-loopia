@@ -1,89 +1,89 @@
 package loopia
 
-import(
+import (
 	"github.com/kolo/xmlrpc"
 )
 
-const(
+const (
 	SERVER = "https://api.loopia.se/RPCSERV"
 )
 
 type Client struct {
 	username string
 	password string
-	client *xmlrpc.Client
+	client   *xmlrpc.Client
 }
 
 func NewClient(username, password string) *Client {
 	cli, _ := xmlrpc.NewClient(SERVER, nil)
-	return &Client {
+	return &Client{
 		username: username,
 		password: password,
-		client: cli,
+		client:   cli,
 	}
 }
 
 const (
-	TYPE_DOMAIN = "LOOPIADOMAIN"
-	TYPE_DNS = "LOOPIADNS"
-	TYPE_PRIVATE = "HOSTING_PRIVATE"
+	TYPE_DOMAIN    = "LOOPIADOMAIN"
+	TYPE_DNS       = "LOOPIADNS"
+	TYPE_PRIVATE   = "HOSTING_PRIVATE"
 	TYPE_BUSSINESS = "HOSTING_BUSSINESS"
-	TYPE_PLUS = "HOSTING_BUSSINESS_PLUS"
+	TYPE_PLUS      = "HOSTING_BUSSINESS_PLUS"
 
-	STATUS_OK = "OK"
-	STATUS_ERROR = "AUTH_ERROR"
+	STATUS_OK       = "OK"
+	STATUS_ERROR    = "AUTH_ERROR"
 	STATUS_OCCUPIED = "DOMAIN_OCCUPIED"
-	STATUS_LIMITED = "RATE_LIMITED"
-	STATUS_BAD = "BAD_INDATA"
-	STATUS_UNKNOWN = "UNKNOWN_ERROR"
-	STATUS_FUNDS = "INSUFFICIENT_FUNDS"
+	STATUS_LIMITED  = "RATE_LIMITED"
+	STATUS_BAD      = "BAD_INDATA"
+	STATUS_UNKNOWN  = "UNKNOWN_ERROR"
+	STATUS_FUNDS    = "INSUFFICIENT_FUNDS"
 
 	CONFIG_NOCONFIG = "NO_CONFIG"
-	CONFIG_PARKING = "PARKING"
-	CONFIG_UNIX = "HOSTING_UNIX"
+	CONFIG_PARKING  = "PARKING"
+	CONFIG_UNIX     = "HOSTING_UNIX"
 	CONFIG_AUTOBAHN = "HOSTING_AUTOBAHN"
-	CONFIG_WINDOWS = "HOSTING_WINDOWS"
+	CONFIG_WINDOWS  = "HOSTING_WINDOWS"
 
-	RENEWAL_NORMAL = "NORMAL"
-	RENEWAL_DEACTIVATED ="DEACTIVATED"
-	RENEWAL_NOT_LOOPIA = "NOT_HANDLED_BY_LOOPIA"
+	RENEWAL_NORMAL      = "NORMAL"
+	RENEWAL_DEACTIVATED = "DEACTIVATED"
+	RENEWAL_NOT_LOOPIA  = "NOT_HANDLED_BY_LOOPIA"
 
-	ORDER_DELETED = "DELETED"
-	ORDER_PENDING = "PENDING"
+	ORDER_DELETED   = "DELETED"
+	ORDER_PENDING   = "PENDING"
 	ORDER_PROCESSED = "PROCESSED"
 )
 
 type Contact struct {
 	FirstName string
-	LastName string
-	Company string
-	Street string
-	Street2 string
-	Zip string
-	City string
-	Country string
-	Orgno string
-	Phone string
-	Cell string
-	Fax string
-	Email string
+	LastName  string
+	Company   string
+	Street    string
+	Street2   string
+	Zip       string
+	City      string
+	Country   string
+	Orgno     string
+	Phone     string
+	Cell      string
+	Fax       string
+	Email     string
 }
 
 type Domain struct {
-	Domain string `xmlrpc:"domain"`
-	Paid int `xmlrpc:"paid"`
-	Registered int `xmlrpc:"registered"`
-	Renewal string `xmlrpc:"renewal_status"`
+	Domain     string `xmlrpc:"domain"`
+	Paid       int    `xmlrpc:"paid"`
+	Registered int    `xmlrpc:"registered"`
+	Renewal    string `xmlrpc:"renewal_status"`
 	Expiration string `xmlrpc:"expiration_date"`
-	Reference int `xmlrpc:"reference_no"`
+	Reference  int    `xmlrpc:"reference_no"`
 }
 
 type Record struct {
-	Type string `xmlrpc:"type"`
-	TTL int `xmlrpc:"ttl"`
-	Priority int `xmlrpc:"priority"`
-	Rdata string `xmlrpc:"rdata"`
-	RecordId int `xmlrpc:"record_id"`
+	Type     string `xmlrpc:"type"`
+	TTL      int    `xmlrpc:"ttl"`
+	Priority int    `xmlrpc:"priority"`
+	Rdata    string `xmlrpc:"rdata"`
+	RecordId int    `xmlrpc:"record_id"`
 }
 
 func (c *Client) GetDomain(domain string) Domain {

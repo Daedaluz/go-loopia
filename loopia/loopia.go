@@ -1,11 +1,11 @@
 package main
 
-import(
+import (
 	"fmt"
 	"github.com/daedaluz/go-loopia"
-	"strings"
 	"os"
 	"strconv"
+	"strings"
 	"text/tabwriter"
 )
 
@@ -26,7 +26,8 @@ func splitname(name string) (string, string) {
 	host := strings.Join(hosts, ".")
 	return host, domain
 }
-var(
+
+var (
 	USERNAME = "dummy"
 	PASSWORD = "dummy"
 )
@@ -56,7 +57,7 @@ func main() {
 			zones := api.GetZoneRecords(subd, domain)
 			fmt.Fprintf(w, "  %s\t%s\t%s\t%s\t%s\n", "Type", "TTL", "Prio", "Rdata", "RecordId")
 			fmt.Fprintf(w, "  %s\t%s\t%s\t%s\t%s\n", "----", "----", "----", "-----", "--------")
-			for _, zone := range(zones) {
+			for _, zone := range zones {
 				fmt.Fprintf(w, "  %s\t%d\t%d\t%s\t%d\n", zone.Type, zone.TTL, zone.Priority, zone.Rdata, zone.RecordId)
 			}
 			w.Flush()
@@ -68,10 +69,10 @@ func main() {
 		if len(args) >= 3 {
 			fmt.Println("Adding record:")
 			fmt.Println(api.AddZoneRecord(subd, domain, &loopia.Record{
-					Type: "A",
-					TTL: 3600,
-					Priority: 0,
-					Rdata: args[3],
+				Type:     "A",
+				TTL:      3600,
+				Priority: 0,
+				Rdata:    args[3],
 			}))
 		}
 
@@ -81,15 +82,15 @@ func main() {
 
 	case "zadd":
 		subd, domain := splitname(args[2])
-		record := loopia.Record {
-			Type: args[3],
-			TTL: 3600,
+		record := loopia.Record{
+			Type:     args[3],
+			TTL:      3600,
 			Priority: 0,
-			Rdata: args[4],
+			Rdata:    args[4],
 		}
 		if len(args) >= 6 {
 			ttl, err := strconv.ParseInt(args[6], 10, 64)
-			if err != nil{
+			if err != nil {
 				fmt.Println(help)
 				return
 			}
