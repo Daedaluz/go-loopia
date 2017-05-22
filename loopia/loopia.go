@@ -63,15 +63,16 @@ func main() {
 		}
 	case "add":
 		subd, domain := splitname(args[2])
-		fmt.Println("Adding subdomain:", api.AddSubdomain(subd, domain))
+		fmt.Println("Adding subdomain:")
+		fmt.Println(api.AddSubdomain(subd, domain))
 		if len(args) >= 3 {
-			fmt.Println("Adding record:",
-				api.AddZoneRecord(subd, domain, &loopia.Record{
+			fmt.Println("Adding record:")
+			fmt.Println(api.AddZoneRecord(subd, domain, &loopia.Record{
 					Type: "A",
 					TTL: 3600,
 					Priority: 0,
 					Rdata: args[3],
-				}))
+			}))
 		}
 
 	case "del":
