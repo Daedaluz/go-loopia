@@ -36,7 +36,7 @@ func main() {
 
 	w := tabwriter.NewWriter(os.Stdout, 3, 4, 2, ' ', 0)
 
-	api := loopia.NewClient("tux@loopiaapi", "tux linux")
+	api := loopia.NewClient(USERNAME, PASSWORD)
 	args := os.Args
 	if len(args) < 3 {
 		fmt.Println(help)
