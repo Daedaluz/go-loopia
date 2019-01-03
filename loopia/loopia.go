@@ -11,11 +11,11 @@ import (
 
 var help = `
 loopia
-    list   [subdomain.]domain.td
+    ls     [subdomain.]domain.td
     add    subdomain.domain.td [ip]
-    del    subdomain.domain.td
+    rm     subdomain.domain.td
     zadd   subdomain.domain.td type data [ttl]
-    zdel   subdomain.domain.td id
+    zrm    subdomain.domain.td id
 `
 
 func splitname(name string) (string, string) {
@@ -43,7 +43,7 @@ func main() {
 		return
 	}
 	switch args[1] {
-	case "list":
+	case "ls":
 		subd, domain := splitname(args[2])
 		if subd == "" {
 			fmt.Printf("%s:\n", domain)
@@ -76,7 +76,7 @@ func main() {
 			}))
 		}
 
-	case "del":
+	case "rm":
 		subd, domain := splitname(args[2])
 		fmt.Println(api.RemoveSubdomain(subd, domain))
 
@@ -98,7 +98,7 @@ func main() {
 		}
 		fmt.Println(api.AddZoneRecord(subd, domain, &record))
 
-	case "zdel":
+	case "zrm":
 		if len(args) < 4 {
 			fmt.Println(help)
 			return
